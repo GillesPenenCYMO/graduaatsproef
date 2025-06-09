@@ -1,0 +1,125 @@
+@namespace("Schemata")
+protocol JADEProtocol {
+      
+        enum Code_aard{
+          Arbeidsongeval,
+          Arbeidsongeval_voorbehoud,
+          Erkend_arbeidsongeval,
+          Geweigerd_arbeidsongeval,
+          Ongeval_gemeen_recht,
+          Ongeval_gemeen_recht_zonder_terugvordering,
+          Ongeval_privé_leven
+        }
+        enum Code_ongeval{
+          Aangifte_is_verzonden,
+          Potentieel_vorderingsdossier,
+          Ongeval_zonder_derde,
+          Vordering_verstuurd_naar_vzmy,
+          CTX_gecreerd,
+          onvolledige_aangifte,
+          Sport_ongeval,
+          Afgesloten_dossier,
+          Geen_ongeval
+        }
+        enum Type_ongeval{
+          Verkeersongeval_bestuurder,
+          Verkeersongeval_zwakke_weggebruiker,
+          Agressie,
+          Ander_ongeval,
+          Verkeersongeval_passagier,
+          Nt_gedetailleerd_verkeersongeval,
+          Ongeval_in_buitenland,
+          Ongeval_met_buitenlandse_derde,
+          Medische_fout,
+          Terrorisme,
+          Aangifte_ongeval_aanvaard,
+          Aangifte_ongeval_onder_voorbehoud,
+          AO_geweigerd,
+          TWO_aanvaard,
+          TWO_onder_voorbehoud,
+          TWO_geweigerd,
+          Einde_TWO,
+          Consolidatie,
+          Genezing_zonder_BWO,
+          AO_privé_sector,
+          AO_publieke_sector,
+          AO_medische_hafltijdse,
+          AO_onderweg_naar_of_van_het_werk 
+        }
+        enum Code_oorsprong{
+          Arbeidsongeschiktheid,
+          papier, // GE KUNT GEEN CIJFERS GEBRUIKEN IN ENUM ?!?!?!?!
+          FAT_Stroom,
+          Tarificatie,
+          Verzekering,
+          Spontaan,
+          Bijdragebon,
+          Loket,
+          Diverse,
+          Carenet
+        }
+        enum Bestemmeling{
+          ETH01,
+          P_en_V,
+          AXARB,
+          KBCPR,
+          BALOI,
+          AG,
+          ALL
+        }
+        enum Taal{
+              NL,
+              FR,
+              ENG
+          }
+
+  record JADE {
+
+      // MINIMUM VEREISTEN:
+
+        string Naam;
+        string Voornaam;
+        string INSZ;
+        int extern_nr;
+        @logicalType("timestamp-millis") long Geboortedatum;
+        string adres;
+
+        @logicalType("timestamp-millis") long laatsteBewerking;
+
+        @logicalType("timestamp-millis") long DatumVerzendingAO;
+        @logicalType("timestamp-millis") long VermoedelijkeDatum;
+
+        @logicalType("timestamp-millis") long DatumOpvolging;
+
+        Taal taal;
+
+        boolean verwittigen_Vzmy;
+
+        //
+        //@logicalType("timestamp-millis") long? WerkelijkeDatum;
+        //
+        //@logicalType("timestamp-millis") long? DatumAfsluiting;
+        //string? RedenAfsluiting;
+        //@logicalType("timestamp-millis") long? AangifteHeropenDatum;
+        //
+        //
+        //string? Toelichting;
+        //
+        ////Herinneringen hier
+        //array<@logicalType("timestamp-millis") long> Herinneringen;
+        //
+        //// enums hier
+        //Code_aard? Code_aard;
+        //Code_ongeval? Code_ongeval;
+        //Type_ongeval? Type_ongeval;
+        //Code_oorsprong? Code_oorsprong;
+        //Bestemmeling? Bestemmeling;
+        //
+        //string? Naam_derde;
+        //string? Schadegegevens_derde;
+        //string? Letsel;
+
+
+
+  }
+}

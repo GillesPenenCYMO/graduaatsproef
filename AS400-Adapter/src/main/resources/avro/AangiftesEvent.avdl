@@ -1,0 +1,303 @@
+@namespace("Schemata")
+
+protocol AangiftesEvents {
+
+
+    record BeheerderToegevoegd {
+        string Beheerder;
+    }
+
+    record ExtraKlantGegevensGegeven{
+
+        //Klantgegevens
+        string klantnummer;
+        string naam;
+        string achternaam;
+        string adres;
+        string telefoonnummer;
+        string email;
+        string geboortedate;
+        string geslacht;
+
+        // date waarop het ongeval heeft plaatsgevonden
+        @logicalType("timestamp-millis") long ongevalsdate;
+
+        // kosten die al gemaakt zijn geweest door de klant kan ook niets zijn!
+        array<int> gemaakteKosten;
+    }
+
+    // ander ongeval of agressie die het letsel veroorzaakt heeft.
+    record SoortOngevalAangegeven{
+        // VDA = Vermoedelijke Duur van Arbeidsongeschiktheid
+        string VDA;
+
+        // werd het slachtoffer opgenomen in het ziekenhuis? ja/nee
+        boolean ZiekenhuisOpname;
+        // zo ja geef de naam van de instelling
+        string instelling;
+        // zo ja geef de date van opname
+        @logicalType("timestamp-millis") long Opnamedate;
+
+        // plaats van de feiten: gemeente en land, straar of plaats, inrichting.
+        string GemeenteOfLand;
+        string straatOfPlaats;
+        // Werf of lokaal waar het ongeval plaatsvond
+        string Inrichting;
+
+        // werd er een proces-verbaal opgesteld? ja/nee
+        boolean Proces_Verbaal;
+        // door welke Politiezone?
+        string ToelichtingPolitie;
+        // nummmer van het proces-verbaal
+        string NummerPv;
+        // date dat het proces-verbaal werd opgesteld
+        @logicalType("timestamp-millis") long datumPv;
+
+        boolean klachtIngediend;
+
+        string Omstandigheden;
+
+        string Verantwoordelijke;
+
+        string GegevensSlachtoffer;
+        string GegevensVerzekering;
+
+        boolean SlachtofferWerk;
+    }
+
+    // inlichting over de derde
+    record ExtraInfoOverDerdeGegeven{
+
+        // naam en adres van de tegenpartij
+        string Naam_en_Adres;
+        // naam en adres van de tegenpartij zijn verzekeraar
+        string Naam_en_AdresVZMIJ;
+        string Polisnummer;
+        string DossierNummer;
+        // naam en adres van de tegenpartij zijn advocaat
+        string Naam_en_AdresAvdocaat;
+
+        // is er een minnelijke schikking getroffen? ja/nee
+        boolean MinnelijkeSchikking;
+        // waarin bestaat de minnelijke schikking
+        string MinnelijkeSchikkingUitleg;
+
+        // is er een schadevergoeding gevorderd? ja/nee
+        boolean Schadevergoeding;
+        // reeds schadeloosstelling verkregen? ja/nee
+        boolean Schadeloostelling;
+        // reeds rechtsvordering ingesteld? ja/nee
+        boolean Rechtsvordering;
+    }
+
+    // welk soort voertuig was in het ongeval betrokken
+    enum SoortVoertuig{
+        Auto,
+        Fiets,
+        Moto,
+        Andere
+    }
+    // info over het verkeersongeval
+    record ExtraDetailsVerkeersOngevalAangegeven{
+
+
+        SoortVoertuig soortVoertuig;
+        // als andere verduidelijk dan:
+        string AndereSoortVoertuig;
+
+        // Voertuig bestuurd door slachtoffer
+        boolean VBDS;
+
+        // nnaam en adres vd eigenaar van het voertuig dat het slachtoffer bestuurde:
+        string Naam_en_AdresBestuurder;
+        // nummerplaat van dat voertuig
+        string Nummerplaat;
+        // VZMIJ van het voertuig
+        string VZMIJvoertuig;
+        // polisnummer
+        string Polisnummer;
+        // Dossiernummer
+        string Dossiernummer;
+
+        //  was Slachtoffer Inzittende in Eigen Wagen
+        boolean SIEW;
+        // was Slachtoffer Inzittende in Andermans Wagen
+        boolean SIAW;
+        // was slachtoffer duozitter van motorfiets of bromfiets
+        boolean DuoZitter;
+        // slachtoffer was een voetganger
+        boolean Voetganger;
+        string Naam_en_AdresBestuurderVoertuig;
+        string Naam_en_AdresEigenaarVoertuig;
+        string ExtraInzittenden;
+    }
+
+    // Arbeidongeval of ongeval op weg naar of van het werk
+    record ExtraDetailsArbeidOngevalAangegeven{
+
+        // TKGW = ter kennis gebracht van de werkgever? ja/nee
+        boolean TKGW;
+        string Naam_en_AdresWerkgever;
+        string Naam_en_AdresVZMIJwerkgever;
+        string PolisNummer;
+        string DossierNummer;
+
+        // heeft werkgeveer de vereiste aangifte van arbeidsongval overgemaajt aan zijn wetsverzekeraar? ja/nee
+        boolean vereisteAangifte;
+        // wordt het ongeval door de wetsverzekeraar erkend als arbeidsongeval of ongeval van/naar het werk? ja/nee
+        boolean ArbeidsongevalOfNiet;
+        // als niet erkend, welke reden?
+        string Uitleg;
+
+        // rechtsvordering ingespannen tegen de werkgever of tegen de wetsverzekeraar? ja/nee
+        boolean Rechtsvordering;
+        // zo ja, bij welke rechtbank en met welk gevolg?
+        string WelkRechtbank;
+        string WelkGevolg;
+
+        // gaat het eventueel om een wederinstorting na een vroeger ongeval? ja/nee
+        boolean Wederinstorting;
+
+        // welk tijdsvlak van arbeidsongeschiktheid is al erkend (begin en einddate)?
+        @logicalType("timestamp-millis") long beginAOdatum;
+        @logicalType("timestamp-millis") long eindeAOdatum;
+        // welk tijdsvlak wordt betwist (begin- en eind-datum)?
+        @logicalType("timestamp-millis") long beginBetwistingdatum;
+        @logicalType("timestamp-millis") long eindeBetwistingdatum;
+    }
+
+    // Schoolongeval/jeugdbeweging/Vakatiekamp/Sportongeval
+    record ExtraDetailsAndereSoortOngevalAangegeven{
+
+        string Naam_en_adresVereniging;
+        string Naam_en_adresVZMIJvereniging;
+        string Polisnummer;
+        string Dossiernummer;
+
+        // werd het slachtoffer moedwillig geslagen of gestampt? ja/nee
+        boolean Moedwillig;
+        // als ja geef de naam en adres van de dader
+        string Derde;
+
+    }
+
+    record WerkelijkeDatumToegevoegd {
+        // Gekende datum Event
+        @logicalType("timestamp-millis") long Werkelijkedatum;
+    }
+
+    record Afgesloten {
+        //Afsluiten Event
+        @logicalType("timestamp-millis") long DatumAfsluiting;
+        string RedenAfsluiting;
+        }
+
+    record Heropend{
+    //Heropenen Event
+    @logicalType("timestamp-millis") long AangifteHeropendate;
+    string RedenHeropening;
+    }
+
+    record ExtraToelichtingGegeven{
+        string Toelichting;
+        }
+
+    record ExtraInfoLetselGegeven{
+        string Letsel;
+        }
+
+    enum Code_aard{
+        Arbeidsongeval,
+        Arbeidsongeval_voorbehoud,
+        Erkend_arbeidsongeval,
+        Geweigerd_arbeidsongeval,
+        Ongeval_gemeen_recht,
+        Ongeval_gemeen_recht_zonder_terugvordering,
+        Ongeval_prive_leven
+    }
+    record ToevoegdCodeAard{
+        Code_aard code_aard;
+        }
+
+    enum Code_ongeval{
+        Aangifte_is_verzonden,
+        Potentieel_vorderingsdossier,
+        Ongeval_zonder_derde,
+        Vordering_verstuurd_naar_vzmy,
+        CTX_gecreerd,
+        onvolledige_aangifte,
+        Sport_ongeval,
+        Afgesloten_dossier,
+        Geen_ongeval
+    }
+    record ToevoegdCodeOngeval{
+        Code_ongeval code_ongeval;
+        }
+
+    enum Type_ongeval{
+        Verkeersongeval_bestuurder,
+        Verkeersongeval_zwakke_weggebruiker,
+        Agressie,
+        Ander_ongeval,
+        Verkeersongeval_passagier,
+        Nt_gedetailleerd_verkeersongeval,
+        Ongeval_in_buitenland,
+        Ongeval_met_buitenlandse_derde,
+        Medische_fout,
+        Terrorisme,
+        Aangifte_ongeval_aanvaard,
+        Aangifte_ongeval_onder_voorbehoud,
+        AO_geweigerd,
+        TWO_aanvaard,
+        TWO_onder_voorbehoud,
+        TWO_geweigerd,
+        Einde_TWO,
+        Consolidatie,
+        Genezing_zonder_BWO,
+        AO_prive_sector,
+        AO_publieke_sector,
+        AO_medische_hafltijdse,
+        AO_onderweg_naar_of_van_het_werk
+    }
+    record ToevoegdTypeOngeval{
+        Type_ongeval type_ongeval;
+        }
+
+    enum Code_oorsprong{
+        Arbeidsongeschiktheid,
+        papier712,
+        FAT_Stroom,
+        Tarificatie,
+        Verzekering,
+        Spontaan,
+        Bijdragebon,
+        Loket,
+        Diverse,
+        Carenet
+    }
+    record ToevoegdOorsprongCode{
+        Code_oorsprong code_oorsprong;
+        }
+
+    enum Bestemmeling{
+        ETH01,
+        P_en_V,
+        AXARB,
+        KBCPR,
+        BALOI,
+        AG,
+        ALL
+    }
+    record ToevoegdWelkeSoortBestemmeling{
+        Bestemmeling bestemmeling;
+        }
+
+    // Verklaring van de klant op erewoord van de gerechtigde of zijn wettelijke vertegenwoordiger
+    record VerklaringGetekend{
+
+        // naam van de persoon die de verklaring aflegt
+        string naam;
+        // date waarop de verklaring is afgelegd
+        @logicalType("timestamp-millis") long datum;
+    }
+}

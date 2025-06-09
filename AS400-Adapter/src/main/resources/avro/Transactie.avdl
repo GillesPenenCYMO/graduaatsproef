@@ -1,0 +1,18 @@
+@namespace("Schemata")
+protocol Transactie {
+
+
+	record Transcatie{
+
+		// unieke identificatie van de transactie
+		int id;
+	}
+
+
+
+
+
+
+
+
+}

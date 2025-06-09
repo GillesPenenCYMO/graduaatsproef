@@ -1,0 +1,22 @@
+@namespace("Schemata")
+protocol VZMIJPROTOCOL{
+
+record VZMIJ{
+
+    // id van de VZMIJ
+    int id;
+    // adres van de VZMIJ
+    string Adres;
+    // naam van de VZMIJ
+    string Naam;
+    // rekeningnummer van de VZMIJ
+    int RekeningnummerVZMIJ;
+
+    //Toevoegen met een TegenpartijGekend Event
+    Tegenpartij tegenpartij;
+}
+ record Tegenpartij{
+        string Naam;
+        string Adres;
+}
+}

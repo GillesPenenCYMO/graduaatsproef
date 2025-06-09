@@ -1,0 +1,27 @@
+server:
+  port: 8081
+
+kafka:
+  topic:
+    aangifte: ${AANGIFTE_TOPIC}
+    dossier: ${DOSSIER_TOPIC}
+
+spring:
+  application:
+    name: as400-adapter
+  kafka:
+    client-id: as400-adapter
+    streams:
+#      application-id: jade-adapterx
+      bootstrap-servers: ${BOOTSTRAP_SERVERS}
+      properties:
+        isolation.level: read_committed
+        processing.guarantee: exactly_once_v2
+        default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+        default.value.serde: org.springframework.kafka.support.serializer.JsonSerde
+    properties:
+      specific.avro.reader: true
+      auto.register.schemas: true
+      avro.remove.java.properties: true
+      value.subject.name.strategy: io.confluent.kafka.serializers.subject.TopicRecordNameStrategy
+

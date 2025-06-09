@@ -1,0 +1,75 @@
+@namespace("eu.cymo.as400.v2.events")
+protocol Event {
+
+	import idl "ids.avdl";
+
+	record Klant {
+		string voornaam;
+		string naam;
+		string INSZ;
+		int externNr;
+		@logicalType("timestamp-millis") long GeboorteDatum;
+		string adres;
+		string taal;
+	}
+	record KostGemaakt{
+		@logicalType("timestamp-millis") long datum;
+		string omschrijving;
+		double bedrag;
+	}
+// EVENTS
+	record DossierAangemaakt {
+		Klant klant;
+		@logicalType("timestamp-millis") long DatumVerzendingAO;
+		@logicalType("timestamp-millis") long VermoedelijkeDatum;
+		boolean verwittigen_Vzmy;
+	}
+
+	record DossierGelinkt {
+		string gekoppeldAanDossierId;
+		string reden; // optioneel
+	}
+
+	record DossierBetwist {
+		string redenBetwisting;
+	}
+
+	record VerzekeringsmaatschappijDerdeVerwittigd {
+		string verzekeraarNaam;
+		string polisNummer;
+	}
+
+	record InfoOpgevraagd {
+		string infoType; // bv. medisch, expert, schade, ...
+		string opgevraagdBij;
+	}
+
+	record DossierAfgesloten {
+		string redenAfsluiting; // optioneel
+	}
+
+	record DossierIngekeken {
+		string ingezienDoor;// bv. gebruiker of systeem
+		@logicalType("timestamp-millis") long inkijkdatum;
+	}
+
+	record UitgavenstaatVerstuurd {
+		string ontvanger; // bv. klant, verzekeraar, derde partij
+		double bedragOpgevraagd; // totaal opgevraagd bedrag in deze uitgavenstaat
+	}
+
+	record GeldOntvangen {
+		double bedrag;
+		string valuta;
+		string van; // betaler
+		string rekeningnummerVan; // IBAN van de betaler
+		string rekeningnummerOntvangenOp; // IBAN waarop het ontvangen werd
+	}
+
+	record InfoOntvangen {
+		string infoType; // bv. "medisch", "expertise", "administratief"
+		string afzender;
+		string beschrijving;
+	}
+
+}

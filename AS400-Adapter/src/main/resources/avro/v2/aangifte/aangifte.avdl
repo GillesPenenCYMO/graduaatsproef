@@ -1,0 +1,35 @@
+@namespace("eu.cymo.jade.v2")
+
+protocol AangifteProtocolV2 {
+
+	import idl "ids.avdl";
+	import idl "event.avdl";
+	record Unknown{}
+
+	record AangifteEvent {
+		@logicalType("timestamp-millis") long EventTimestamp;
+		string aangifteId;
+		string eventType;
+		union {
+			Unknown,
+			eu.cymo.jade.v2.events.AangifteGeregistreerd,
+			eu.cymo.jade.v2.events.BeheerderToegevoegd,
+			eu.cymo.jade.v2.events.ExtraInfoOverDerdeGegeven,
+			eu.cymo.jade.v2.events.ExtraDetailsVerkeersOngevalAangegeven,
+			eu.cymo.jade.v2.events.Afgesloten,
+			eu.cymo.jade.v2.events.Heropend,
+			eu.cymo.jade.v2.events.ExtraToelichtingGegeven,
+			eu.cymo.jade.v2.events.ExtraInfoLetselGegeven,
+			eu.cymo.jade.v2.events.CodeAardToevoegd,
+			eu.cymo.jade.v2.events.ToevoegdCodeOngeval,
+			eu.cymo.jade.v2.events.BestemmelingToegevoegd,
+			eu.cymo.jade.v2.events.OorsprongCodeToevoegd,
+			eu.cymo.jade.v2.events.TypeOngevalToevoegd,
+			eu.cymo.jade.v2.events.VerklaringGetekend,
+			eu.cymo.jade.v2.events.SoortOngevalAangegeven,
+			eu.cymo.jade.v2.events.ExtraDetailsAndereSoortOngevalAangegeven,
+			eu.cymo.jade.v2.events.ExtraDetailsArbeidOngevalAangegeven,
+			eu.cymo.jade.v2.events.Opgewardeerd
+		} event;
+	}
+}

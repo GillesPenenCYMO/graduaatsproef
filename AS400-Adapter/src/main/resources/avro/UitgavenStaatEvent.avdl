@@ -1,0 +1,43 @@
+@namespace("Schemata")
+
+protocol UitgavenStaatEvent{
+
+	// verstekker = persoon die medicijnne/hulpmiddel effectieg levert
+	record VerstrekkerToegevoegd{
+		string Naam;
+		int Nummer;
+	}
+	record ItemToevoegd{
+
+		// id van de item
+		int Nummer;
+		string StukNummer;
+		int NomenClatuur;
+		string Omschrijving;
+		@logicalType("timestamp-millis") long PrestatieDatum;
+		VerstrekkerToegevoegd Verstrekker;
+		string Voorschijver;
+		// totaal kostprijs van item
+		bytes Bedrag;
+		// deel van de totale kostprijs dat remgeld is
+		bytes Remgeld;
+		// bedragen samen opgeteld tss bepaalde datum's
+		bytes SubTotaal;
+
+	}
+
+
+	// bedragen die betaald werden op een bepaalde periode opgedeeld in begin/einddatum, gemmiddeld dag kost, brutobredrag, voorheffingsbedrag en nettobedrag.
+	record UitgavenstaatUitkeringenAlgemeenGekend{
+		@logicalType("timestamp-millis") long BeginDatum;
+		@logicalType("timestamp-millis") long EindDatum;
+		int AantalDagen;
+		bytes BrutoBedrag;
+		bytes Dagbedrag;
+		bytes BedragVoorheffing;
+		bytes NettoBedrag;
+	}
+}
+
+
+

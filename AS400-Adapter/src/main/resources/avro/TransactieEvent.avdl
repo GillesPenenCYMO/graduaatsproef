@@ -1,0 +1,43 @@
+@namespace("Schemata")
+protocol TransactieEvent {
+
+
+
+
+
+    record Ontvangen {
+
+
+        // de mededeling die de VZMIJ meegeeft bij het storten van het bedrag.
+        string Mededeling;
+        // rekeningnummer van de VZMIJ
+        int RekeningnummerVZMIJ;
+        // rekeningnummer van eigen rekening
+        int RekeningnummerEigen;
+        // bedrag van de transactie
+        bytes Bedrag;
+
+        // datum van de transactie
+        @logicalType("timestamp-millis") long OntvangstDatum;
+}
+
+
+    record TerugGestuurd {
+        @logicalType("timestamp-millis") long Datum;
+        string reden;
+
+}
+
+
+    record Gelinkt{
+        @logicalType("timestamp-millis") long Datum;
+
+}
+
+
+    record Geboekt{
+        @logicalType("timestamp-millis") long Datum;
+
+}
+
+}

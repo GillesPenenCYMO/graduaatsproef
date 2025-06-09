@@ -1,0 +1,59 @@
+@namespace("Schemata")
+protocol UitgavenstaatProtocol{
+    import idl "UitgavenStaatEvent.avdl";
+
+record Uitgavenstaat{
+
+    int Klantnummer;
+
+    @logicalType("timestamp-millis") long Datum;
+    // Voornaam en achternaam van de klant	
+    string Voornaam;
+    string Achternaam;
+    // naam&achternaam vd contactpersoon
+    string Contactpersoon;
+    // referentienummer van dossier
+    string ReferentieNummer;
+
+    //  totaal bedrag van de uitgavenstaat
+    int TotaalBedrag;
+    // bedrag waarvan uitkering voor arbeidsongeschiktheid
+    int UitkeringsBedrag;
+    // bedrag waarvan gezondheidszorg
+    int Gezondheidszorg;
+
+    // datum waarvan ongeval is gebeurd
+    @logicalType("timestamp-millis") long DatumOngeval;
+    // datum waarvan afdruk is gebeurd
+    @logicalType("timestamp-millis") long DatumAfdruk;
+    
+    int externnummer;
+    int NISS;
+    string SocialeStatus;
+    
+    // Event omdat er meer kunnen bijkomen
+    array<ItemToevoegd> item;
+
+    // deel van gezondheidszorg dat door verzekering zelf moet betaald worden
+    bytes VerplichteVerzekering;
+    // deel van de gezondheidszorg dat door vrije verzekering moet betaald worden
+    bytes VrijeVerzekering;
+    // deel van de gezondheidszorg dat door de bijkomende verzekering  moet betaald worden
+    bytes BijkomendeVerzekering;
+    // deel van de gezondheidszorg dat door de hospitalisatie verzekering moet betaald worden
+    bytes HospitalisatieVerzekering;
+    // deel van de gezondheidszorg dat door de diverse verzekering moet betaald worden
+    bytes DiverseVerzekering;
+    bytes CentraalAlarmDZB;
+    bytes VPVlaanderen;
+    bytes VPregioWallonië;
+    bytes VPBrussel;
+    bytes VPfwb;
+    bytes VPVlaamseSocbescherming;
+
+    array<VerstrekkerToegevoegd> Verstrekker;
+    UitgavenstaatUitkeringenAlgemeenGekend Uitkeringen;
+
+
+}
+}

@@ -1,0 +1,40 @@
+@namespace("eu.cymo.as400.v2")
+
+protocol dossier {
+
+	import idl "ids.avdl";
+	import idl "event.avdl";
+	record Unknown{}
+
+	record DossierEvent {
+		@logicalType("timestamp-millis") long EventTimestamp;
+		string dossierId;
+		string eventType;
+		union {
+			Unknown,
+			eu.cymo.as400.v2.events.DossierAangemaakt,
+			eu.cymo.as400.v2.events.DossierAfgesloten,
+			eu.cymo.as400.v2.events.DossierBetwist,
+			eu.cymo.as400.v2.events.DossierGelinkt,
+			eu.cymo.as400.v2.events.DossierIngekeken,
+			eu.cymo.as400.v2.events.GeldOntvangen,
+			eu.cymo.as400.v2.events.KostGemaakt,
+			eu.cymo.as400.v2.events.InfoOpgevraagd,
+			eu.cymo.as400.v2.events.UitgavenstaatVerstuurd,
+			eu.cymo.as400.v2.events.VerzekeringsmaatschappijDerdeVerwittigd,
+			eu.cymo.as400.v2.events.InfoOntvangen
+
+
+
+		} event;
+	}
+
+	record DossierState {
+		string id;
+		eu.cymo.as400.v2.events.Klant klant;
+		@logicalType("timestamp-millis") long datumVerzendingAO;
+		@logicalType("timestamp-millis") long vermoedelijkeDatum;
+		boolean verwittigenVzmy;
+		double openstaandBedrag;
+	}
+}

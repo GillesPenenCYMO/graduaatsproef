@@ -1,0 +1,80 @@
+@namespace("Schemata")
+protocol AS400Protocol{
+
+    record AS400{
+
+        //MINIMUM VEREIST:
+        string Naam_en_FamilieNaam;
+        string INSZ;
+        int extern_nr;
+        @logicalType("timestamp-millis") long datum;
+        string adres;
+
+        Ongeval ongeval;
+
+        array<Tijdlijn> tijdlijn;
+    }
+
+    enum Code_aard{
+          Arbeidsongeval,
+          Arbeidsongeval_voorbehoud,
+          Erkend_arbeidsongeval,
+          Geweigerd_arbeidsongeval,
+          Ongeval_gemeen_recht,
+          Ongeval_gemeen_recht_zonder_terugvordering,
+          Ongeval_privé_leven
+        }
+    enum Type_ongeval{
+          Verkeersongeval_bestuurder,
+          Verkeersongeval_zwakke_weggebruiker,
+          Agressie,
+          Ander_ongeval,
+          Verkeersongeval_passagier,
+          Nt_gedetailleerd_verkeersongeval,
+          Ongeval_in_buitenland,
+          Ongeval_met_buitenlandse_derde,
+          Medische_fout,
+          Terrorisme,
+          Aangifte_ongeval_aanvaard,
+          Aangifte_ongeval_onder_voorbehoud,
+          AO_geweigerd,
+          TWO_aanvaard,
+          TWO_onder_voorbehoud,
+          TWO_geweigerd,
+          Einde_TWO,
+          Consolidatie,
+          Genezing_zonder_BWO,
+          AO_privé_sector,
+          AO_publieke_sector,
+          AO_medische_hafltijdse,
+          AO_onderweg_naar_of_van_het_werk 
+        }
+    enum Bestemmeling{
+          ETH01,
+          P_en_V,
+          AXARB,
+          KBCPR,
+          BALOI,
+          AG,
+          ALL
+        }
+
+
+    record Ongeval{
+        int nummer;
+        @logicalType("timestamp-millis") long datumOngeval;
+        Code_aard code_aard;
+        Type_ongeval type_ongeval;
+        Bestemmeling bestemmeling;
+
+
+       @logicalType("timestamp-millis") long OpvolgDatum;
+
+        array<Tijdlijn> tijdlijn;
+}
+
+    record Tijdlijn{
+    string tekst;
+    @logicalType("date") int DatumAanpassing;
+}
+}

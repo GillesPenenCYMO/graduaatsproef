@@ -1,0 +1,23 @@
+kafka:
+  topic:
+    aangifte: ${AANGIFTE_TOPIC}
+    dossier: ${DOSSIER_TOPIC}
+
+spring:
+  application:
+    name: as400-adapter
+  kafka:
+    bootstrap-servers: ${BOOTSTRAP_SERVERS}
+    streams:
+      application-id: ${APP_ID}
+    properties:
+      # kafka auth
+      sasl.jaas.config: "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"${KAFKA_KEY}\" password=\"${KAFKA_SECRET}\";"
+      sasl.mechanism: PLAIN
+      security.protocol: SASL_SSL
+      ssl.endpoint.identification.algorithm: https
+      # schema registry
+      schema.registry.url: ${SCHEMA_REGISTRY_URL}
+      schema.registry.basic.auth.user.info: "${SCHEMA_REGISTRY_API_KEY}:${SCHEMA_REGISTRY_API_SECRET}"
+      basic.auth.credentials.source: "USER_INFO"
+

@@ -1,0 +1,24 @@
+@namespace("Schemata")
+
+protocol DossierEvents{
+
+
+
+
+    record aangemaakt{
+        @logicalType("timestamp-millis") long DatumAangemaakt;
+    }
+
+    record Geïnspecteerd{
+        string Voornaam;
+        string Achternaam;
+        @logicalType("timestamp-millis") long DatumAfsluiting;
+    }
+    record Afgesloten{
+        //Afsluiten Event
+        @logicalType("timestamp-millis") long DatumAfsluiting;
+        string RedenAfsluiting;
+    }
+
+
+}

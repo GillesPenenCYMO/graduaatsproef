@@ -1,0 +1,82 @@
+@namespace("Schemata")
+
+protocol aangifteProtocol {
+
+	import idl "AangiftesEvent.avdl";
+
+
+	enum Taal{
+		NL,
+		FR,
+		ENG
+	}
+
+
+	record aangifte {
+
+		//MINIMUM NODIG:
+
+		string VoornaamKlant;
+		string AchternaamKlant;
+		string INSZ;
+		int extern_nr;
+		@logicalType("timestamp-millis") long GeboorteDatum;
+		string adres;
+
+		@logicalType("timestamp-millis") long LaatsteBewerking;
+
+		@logicalType("timestamp-millis") long DatumVerzendingAO;
+		@logicalType("timestamp-millis") long VermoedelijkeDatum;
+
+		@logicalType("timestamp-millis") long DatumOpvolging;
+
+		boolean verwittigen_Vzmy;
+
+		Taal taal;
+		array<gemaakteKosten> kosten;
+
+		BeheerderToegevoegd? Beheerder;
+
+		ExtraKlantGegevensGegeven? KlantGegevens;
+
+		SoortOngevalAangegeven? SoortOngeval;
+
+		ExtraInfoOverDerdeGegeven? ExtraInfoOverDerde;
+
+		ExtraDetailsVerkeersOngevalAangegeven? ExtraDetailsVerkeersOngeval;
+
+		ExtraDetailsArbeidOngevalAangegeven? ExtraDetailsArbeidOngeval;
+
+		ExtraDetailsAndereSoortOngevalAangegeven? ExtraDetailsAndereSoortOngeval;
+
+		WerkelijkeDatumToegevoegd? WerkelijkeDatumGekend;
+
+		Afgesloten? AfsluitingAangifte;
+
+		Heropend? AangifteHeropend;
+
+		ExtraToelichtingGegeven? ExtraToelichting;
+
+		ExtraInfoLetselGegeven? ExtraInfoLetsel;
+
+		ToevoegdCodeAard? ToevoegenVanCodeAard;
+
+		ToevoegdCodeOngeval? ToevoegenVanCodeOngeval;
+
+		ToevoegdTypeOngeval? ToevoegenVanTypeOngeval;
+
+		ToevoegdOorsprongCode? ToevoegenOorsprongCode;
+
+		ToevoegdWelkeSoortBestemmeling? ToevoegenWelkeSoortBestemmeling;
+
+		VerklaringGetekend? VerklaringGetekend;
+
+
+	}
+
+	record gemaakteKosten{
+		@logicalType("timestamp-millis") long datum;
+		string onmschrijving;
+		bytes bedrag;
+	}
+}

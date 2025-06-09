@@ -1,0 +1,7 @@
+@namespace("eu.cymo.jade.v2.ids")
+protocol Id {
+
+	record DossierNummer {
+		string id;
+	}
+}
